@@ -115,6 +115,7 @@ bool AutoCrystal::canPlaceCrystal(Vec3<int> placePos) {
 		// If any entity's AABB intersects with the placement AABB, return false
 		if (targetAABB.intersects(placeAABB))
 			return false;
+		if (targetAABB.intersects(targetAABB) continue;
 	}
 
 	return true;
