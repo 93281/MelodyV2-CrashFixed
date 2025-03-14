@@ -6,4 +6,5 @@ struct MobBodyRotationComponent
 {
 	float yBodyRot; //0x0000
 	float yOldBodyRot; //0x0004
+	float newRot1;
 };
