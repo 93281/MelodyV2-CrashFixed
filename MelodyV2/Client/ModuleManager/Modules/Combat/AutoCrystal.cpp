@@ -8,6 +8,7 @@
 #include <ranges>
 #include <mutex>
 #include <omp.h>
+int atkfactor = 1;
 bool Damagerender = false;
 AutoCrystal::AutoCrystal() : Module("AutoCrystal", "NULL", Category::COMBAT, 0x0) {
 	addSlider<float>("Target Range", "NULL", ValueType::FLOAT_T, &targetRange, 5.f, 30.f);
@@ -25,6 +26,7 @@ AutoCrystal::AutoCrystal() : Module("AutoCrystal", "NULL", Category::COMBAT, 0x0
 	addSlider<float>("Min Break Damage", "NULL", ValueType::FLOAT_T, &minBreakDame, 1.f, 20.f);
 	addSlider<int>("Break Delay", "NULL", ValueType::INT_T, &breakDelay, 0, 20);
 	addBoolCheck("ID Predict", "NULL", &idPredict);
+	addSlider<int>("Factor", "NULL", ValueType::INT_T, &atkfactor, 1, 30);
 
 	addSlider<int>("Packets", "NULL", ValueType::INT_T, &packets, 1, 30);
 	addSlider<int>("Ticks", "NULL", ValueType::INT_T, &Ticks, 0, 100);
@@ -221,9 +223,9 @@ void AutoCrystal::breakCrystal() {
 		highestID = breakList[0].crystalActor->getRuntimeID();
 
 
-
+for (auto i = 0; i < atkfactor; i++) {
 		attack(breakList[0].crystalActor);
-
+}
 		breakDelayTick = 0;
 	}
 	else {
