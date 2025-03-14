@@ -47,7 +47,7 @@ void HookManager::init() {
 	KeyMouseHook::init();
 	GetGlintColorHook::init();
 	CauseHurtHook::init();
-	//ActorServerRots::init();
+	ActorServerRots::init();
 	FontDrawTransformedHook::init();
 	GetCameraModeHook::init();
 	GetFovHook::init();
@@ -58,7 +58,7 @@ void HookManager::init() {
 	RenderLevelHook::init();
 	ActorShouldRenderHook::init();
 	onContainerScreenControllerTickEventHook::init();
-	//ServerTickBlockBreakingHook::init(); // Dinh dung func nay lam Packetmine ma no ncc
+	ServerTickBlockBreakingHook::init(); // Dinh dung func nay lam Packetmine ma no ncc
 	GetCurrentSwingDurationHook::init();
 	ActorSlowDownHook::init();
 
@@ -70,7 +70,7 @@ void HookManager::init() {
 		ActorLerpMotionHook::init((uintptr_t)PlayerVTable[27]);
 		ActorNormalTickHook::init((uintptr_t)PlayerVTable[29]);
 		ActorIsOnFireHook::init((uintptr_t)PlayerVTable[58]);
-		//ActorShouldRenderHook::init((uintptr_t)PlayerVTable[75]);
+		ActorShouldRenderHook::init((uintptr_t)PlayerVTable[75]);
 		ActorSwingHook::init((uintptr_t)PlayerVTable[132]);
 	}
 	// GameMode Vtables
