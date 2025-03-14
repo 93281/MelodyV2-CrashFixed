@@ -7,18 +7,30 @@
 struct ActorRotationComponent
 {
 public:
-	Vec2<float> rotation;
-	Vec2<float> oldRotation;
+    Vec2<float> rotation;
+    Vec2<float> oldRotation;
 
-	ActorRotationComponent(const Vec2<float>& rotation) : rotation(rotation), oldRotation(rotation) {}
+    ActorRotationComponent(const Vec2<float>& rotation) : rotation(rotation), oldRotation(rotation) {}
+    bool IsValidRotation(const Vec2<float>& rots) const
+    {
+        return !std::isnan(rots.x) && !std::isnan(rots.y) && std::isfinite(rots.x) && std::isfinite(rots.y);
+    }
 
-	[[nodiscard]] const Vec2<float>& Get() const
-	{
-		return this->rotation;
-	}
+    [[nodiscard]] const Vec2<float>& Get() const
+    {
+        return this->rotation;
+    }
 
-	void Set(Vec2<float> rots)
-	{
-		this->rotation = rots;
-	}
+    void Set(Vec2<float> rots)
+    {
+        if (IsValidRotation(rots))
+        {
+            this->oldRotation = this->rotation;
+            this->rotation = rots;
+        }
+        else
+        {
+            this->rotation = this->oldRotation;
+        }
+    }
 };
