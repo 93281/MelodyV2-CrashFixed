@@ -10,7 +10,7 @@
 #include <omp.h>
 bool Damagerender = false;
 AutoCrystal::AutoCrystal() : Module("AutoCrystal", "NULL", Category::COMBAT, 0x0) {
-	addSlider<float>("Target Range", "NULL", ValueType::FLOAT_T, &targetRange, 5.f, 20.f);
+	addSlider<float>("Target Range", "NULL", ValueType::FLOAT_T, &targetRange, 5.f, 30.f);
 
 	addBoolCheck("Auto Place", "NULL", &autoPlace);
 	addSlider<float>("Place Range", "NULL", ValueType::FLOAT_T, &placeRange, 3.f, 10.f);
@@ -50,11 +50,13 @@ bool AutoCrystal::sortEntityByDist(Actor* a1, Actor* a2) {
 }
 
 bool AutoCrystal::isHoldingCrystal() {
+     if (!breakList.empty()) {
 	auto* plrInv = mc.getLocalPlayer()->getPlayerInventory();
 	auto* inv = plrInv->inventory;
 	auto slot = plrInv->selectedSlot;
 	auto* itemStack = inv->getItemStack(slot);
 	return (itemStack->isValid()) ? itemStack->getItemPtr()->getitemId() == 720 : false;
+	}
 }
 void AutoCrystal::cleardalist() {
 	entityList.clear();
